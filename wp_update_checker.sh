@@ -50,7 +50,7 @@ do
             SVN_CURRENT=`svn info | sed -n 2p | cut -d ' ' -f 2 | sed 's_http:/__g' | awk -F "/" '{print $NF}'`
             SVN_URL=`svn info | sed -n 3p | cut -d ' ' -f 3`
             SVN_LATEST=`svn ls $SVN_URL/${PWD##*/}/tags | sed "s_/__g" | sort -n -r | sed -n 1p`
-            if [[ -n $SVN_CURRENT ]] && [[ $SVN_LATEST = $SVN_CURRENT ]]; then
+            if [[ -n $SVN_CURRENT ]] && [[ $SVN_LATEST != $SVN_CURRENT ]]; then
                 echo "$dir need an update! Current: $SVN_CURRENT Newest: $SVN_LATEST"
             fi
         fi
