@@ -49,7 +49,7 @@ do
         if [[ $? -eq 0 ]]; then 
             SVN_CURRENT=`svn info | sed -n 2p | cut -d ' ' -f 2 | sed 's_http:/__g' | awk -F "/" '{print $NF}'`
             SVN_URL=`svn info | sed -n 3p | cut -d ' ' -f 3`
-            SVN_LATEST=`svn ls $SVN_URL/${PWD##*/}/tags | sed "s_/__g" |  sort -bt. -k1,1 -k2,2n -k3,3n -k4,4n -k5,5n | tail -n 1`
+            SVN_LATEST=`svn ls $SVN_URL/${PWD##*/}/tags | sed "s_/__g" |  sort -but. -k1,1 -k2,2n -k3,3n -k4,4n -k5,5n | tail -n 1`
             if [[ -n $SVN_CURRENT ]] && [[ -n $SVN_LATEST ]] && [[ $SVN_LATEST != $SVN_CURRENT ]]; then
                 echo "$dir need an update! Current: $SVN_CURRENT Newest: $SVN_LATEST"
                 echo "=> Please go to $SRC/$dir and do: svn switch $SVN_URL/$dir/tags/$SVN_LATEST"
